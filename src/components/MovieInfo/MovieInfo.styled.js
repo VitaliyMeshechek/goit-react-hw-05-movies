@@ -1,27 +1,12 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  color: rgb(0, 0, 0);
-  font-size: 34px;
+export const Wrraper = styled.div`
+  position: relative;
+  border-radius: 5px;
 `;
 
-export const List = styled.ul`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-gap: 20px;
-list-style: none;
-`;
-
-export const Item = styled.li`
-  border-radius: 2px;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+export const Container = styled.div`
+height: auto;
 `;
 
 export const Img = styled.img`
@@ -36,7 +21,7 @@ export const Img = styled.img`
   }
 `;
 
-export const TitleCard = styled.h2`
+export const Title = styled.h2`
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -60,5 +45,3 @@ export const Paragraph = styled.p`
   color: rgb(139, 0, 0);
   background-color: rgb(0, 255, 255);
 `;
-
-

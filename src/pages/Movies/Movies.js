@@ -1,36 +1,67 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchMoviesDetails } from "Api";
-import {MovieDetails} from '..//MovieDetails/MovieDetails';
+import { toast } from 'react-toastify';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { fetchSearchMovies } from "Api";
+import { MoviesList } from 'components/MoviesList/MoviesList';
+import { SearchMovie } from 'components/SearchMovie/SearchMovie';
+
+// import {MovieDetails} from '..//MovieDetails/MovieDetails';
+// import { BackLink } from 'components/BackLink/BackLink';
+// import { MovieCard } from 'components/MovieCard/MovieCard';
+import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import { Title, List, Item } from './Movies.styled';
+
+
+
+
 
 
 export const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const {id} = useParams();
-  // const movies = fetchMoviesDetails()
+  const query = searchParams.get('query' ?? '');
+
+  // const location = useLocation();
 
    useEffect(() => {
-   async function fetchMoovMoviesEffect() {
+    async function fetchSearchMoviesEffect() {
+      if (query === '') return;
 
       try {
-        const data = await fetchMoviesDetails(id);
-         setMovies([...data.results]);
-         console.log(data.results);
+        setIsLoading(true);
+
+        const data = await fetchSearchMovies(query);
+
+        if (data.length === 0) {
+          toast.info('Search results did not match any movies! Enter a different name.', {
+            autoClose: 3000,
+          });
+        }
+         setMovies(data);
+         console.log('Movies', data);
 
        } catch (error) {
-         setError('Something went wrong:(');
+        setError(toast.error('Something went wrong:('));
+      } finally {
+        setIsLoading(false);
       }
      }
-    fetchMoovMoviesEffect()
- }, [id])
+     fetchSearchMoviesEffect()
+ }, [query])
+
+
+ const updateQueryString = movieName => {
+  setSearchParams(movieName !== '' ? { query: movieName } : {});
+};
 
   return (
     <main>
-      {movies.map((movie, id) => {
-        return <MovieDetails key={id} {...movie}/>
-     })}
+    {!isLoading && <SearchMovie onSubmit={updateQueryString} />}
+      {!isLoading && query !== null && <MoviesList movies={movies} />}
+      {error && <h2>{error}</h2>}
     </main>
   );
 };

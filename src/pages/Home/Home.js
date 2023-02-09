@@ -1,43 +1,54 @@
-import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+
+import { useState, useEffect, Suspense } from 'react';
 import { fetchMoviesTrending } from "Api";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Title, List, Item, TitleCard, Img, Paragraph } from './Home.styled';
+import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import { MoviesList } from 'components/MoviesList/MoviesList';
+
 
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // const moviesList = fetchMoviesTrending();
-  // console.log(moviesList);
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchMoviesEffect() {
-
+      setIsLoading(true);
         try {
           const data = await fetchMoviesTrending();
-          setMovies([...data.results]);
-          console.log([data.results]);
+          setMovies(data);
+          console.log('Home', data);
 
         } catch (error) {
-          setError('Something went wrong:(');
+          setError(toast.error('Something went wrong:('));
+        } finally {
+          setIsLoading(false);
         }
       }
       fetchMoviesEffect()
   }, [])
 
+// console.log(movies);
   return (
     <main>
-      <div>
-        <h1>Trending Today</h1>
-          {movies.map(movie => (<Link key={movie.id} to={`/movies/${movie.id}`}>
-            <li>{movie.title}</li>
+      <Title>Trending Today</Title>
+          <List>
+          {movies.map((item) => (
+          <Link key={item.id} to={`/movies/${item.id}`} state={{ from: location }}>
+            <Item >
+              <MovieInfo movie={item}/>
+            </Item>
           </Link>
-          ))}
-      </div>
+      ))}
+    </List>
     </main>
   );
 };
-
 
 
 

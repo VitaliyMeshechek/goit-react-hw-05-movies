@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  color: rgb(0, 0, 0);
-  font-size: 34px;
-`;
-
 export const List = styled.ul`
 display: flex;
 justify-content: center;
@@ -36,7 +27,7 @@ export const Img = styled.img`
   }
 `;
 
-export const TitleCard = styled.h2`
+export const Title = styled.h2`
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -50,15 +41,13 @@ export const TitleCard = styled.h2`
   `;
 
 export const Paragraph = styled.p`
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 22px;
+position: absolute;
+top: 5px;
+right: 15px;
+padding: 5px;
+border-radius: 5px;
+font-size: 22px;
 
-  color: rgb(139, 0, 0);
-  background-color: rgb(0, 255, 255);
+color: rgb(139, 0, 0);
+background-color: rgb(0, 255, 255);
 `;
-
-
