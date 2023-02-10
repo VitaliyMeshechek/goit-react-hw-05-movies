@@ -16,13 +16,13 @@ export const MoviesList = ({movies}) => {
 
   useEffect(() => {
    async function fetchMoovMoviesEffect() {
-    console.log('я тут');
 
       try {
         const data = await fetchMoviesDetails(id);
-
-        setdetailsMovies(data);
-         console.log('MovieDetails', data);
+        if(data.results.length > 0) {
+          setdetailsMovies(data.results);
+          console.log('MovieDetails', data.results);
+        }
         } catch (error) {
           setError('Something went wrong:(');
         } finally {
@@ -34,15 +34,15 @@ export const MoviesList = ({movies}) => {
 
   return (
     <>
-    <h1>jghhghgh</h1>
     {detailsMovies === null && (
       <List>
       {movies.map(({movie}) => (
         <Item key={movie.id}>
-          <Link to={`/movies/${movie.id}`} state={ {from: location } } >
+          <Link to={`/movies/${movie.id}`} state={ {from: location } }>
             <MovieInfo
              movie={movie}
             />
+            {movie.title}
           </Link>
         </Item>
           ))}

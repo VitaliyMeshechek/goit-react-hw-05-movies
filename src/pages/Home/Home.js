@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchMoviesTrending } from "Api";
-import { Link, useLocation, Outlet } from 'react-router-dom';
-import { Title, List, Item, TitleCard, Img, Paragraph } from './Home.styled';
+import { Link, useLocation } from 'react-router-dom';
+import { Title, List, Item } from './Home.styled';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
-import { MoviesList } from 'components/MoviesList/MoviesList';
+
 
 
 
@@ -21,8 +21,8 @@ export const Home = () => {
       setIsLoading(true);
         try {
           const data = await fetchMoviesTrending();
-          setMovies(data);
-          console.log('Home', data);
+            setMovies(data.results);
+            // console.log('Home', data.results);
 
         } catch (error) {
           setError(toast.error('Something went wrong:('));
@@ -33,7 +33,6 @@ export const Home = () => {
       fetchMoviesEffect()
   }, [])
 
-// console.log(movies);
   return (
     <main>
       <Title>Trending Today</Title>

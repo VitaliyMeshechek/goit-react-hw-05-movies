@@ -7,6 +7,7 @@ export const Wrraper = styled.div`
 
 export const Container = styled.div`
 height: auto;
+width: 100%;
 `;
 
 export const Img = styled.img`
@@ -19,7 +20,16 @@ export const Img = styled.img`
     transform: scale(1.03);
     cursor: zoom-in;
   }
+
+  @media screen and (min-width: 768px) and (max-width: 1169px) {
+  flex-basis: calc(100% / 3 - 20px);
+}
+
+  @media screen and (min-width: 1170px) {
+  flex-basis: calc(100% / 4 - 20px);
+}
 `;
+
 
 export const Title = styled.h2`
   display: flex;

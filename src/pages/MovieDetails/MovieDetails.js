@@ -15,14 +15,13 @@ export const MovieDetails = () => {
 
    useEffect(() => {
    async function fetchMoovMoviesEffect() {
-    console.log('я тут');
     setIsLoading(true);
 
       try {
         const data = await fetchMoviesDetails(id);
 
          setMovies(data);
-         console.log('MovieDetails', data);
+        //  console.log('MovieDetails', data);
         } catch (error) {
           setError('Something went wrong:(');
         } finally {
@@ -38,8 +37,8 @@ export const MovieDetails = () => {
       <ThreeCircles
       height="100"
       width="100"
-      color="#4fa94d"
-      wrapperStyle={{}}
+      color="rgb(255, 69, 0)"
+      wrapperStyle={{ display: 'flex', justifyContent:  'center' }}
       wrapperClass=""
       visible={true}
       ariaLabel="three-circles-rotating"

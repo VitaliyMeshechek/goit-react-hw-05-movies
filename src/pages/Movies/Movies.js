@@ -1,19 +1,10 @@
-import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from "Api";
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { SearchMovie } from 'components/SearchMovie/SearchMovie';
-
-// import {MovieDetails} from '..//MovieDetails/MovieDetails';
-// import { BackLink } from 'components/BackLink/BackLink';
-// import { MovieCard } from 'components/MovieCard/MovieCard';
-import { MovieInfo } from 'components/MovieInfo/MovieInfo';
-import { Title, List, Item } from './Movies.styled';
-
-
-
-
 
 
 export const Movies = () => {
@@ -22,9 +13,7 @@ export const Movies = () => {
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const query = searchParams.get('query' ?? '');
-
-  // const location = useLocation();
+  const query = searchParams.get('query');
 
    useEffect(() => {
     async function fetchSearchMoviesEffect() {
@@ -40,11 +29,11 @@ export const Movies = () => {
             autoClose: 3000,
           });
         }
-         setMovies(data);
-         console.log('Movies', data);
+         setMovies(data.results);
+         console.log('Movies', data.results);
 
        } catch (error) {
-        setError(toast.error('Something went wrong:('));
+        setError('Something went wrong:(');
       } finally {
         setIsLoading(false);
       }
@@ -53,13 +42,13 @@ export const Movies = () => {
  }, [query])
 
 
- const updateQueryString = movieName => {
-  setSearchParams(movieName !== '' ? { query: movieName } : {});
+ const onSearchParams = searchMovie => {
+  setSearchParams(searchMovie !== '' ? { query: searchMovie } : {});
 };
 
   return (
     <main>
-    {!isLoading && <SearchMovie onSubmit={updateQueryString} />}
+    {!isLoading && <SearchMovie onSubmit={onSearchParams} />}
       {!isLoading && query !== null && <MoviesList movies={movies} />}
       {error && <h2>{error}</h2>}
     </main>

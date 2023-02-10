@@ -22,7 +22,7 @@ export const SearchMovie = ({ onSubmit }) => {
 
     <Input
       type="text"
-      name="search"
+      name="name"
       autocomplete="off"
       placeholder="Search images and photos"
     />
