@@ -20,7 +20,7 @@ export const Img = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: top;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
   :hover {
     transform: scale(1.03);
     cursor: zoom-in;
@@ -35,6 +35,7 @@ export const Title = styled.h2`
   color: rgb(0, 0, 0);
   font-size: 22px;
   line-height: 1.18;
+  transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
   color: rgb(255, 69, 0);
 }

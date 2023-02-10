@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Link, useLocation } from "react-router-dom";
 import { ContainerWrraper, Img, TitleMain, Title, Paragraph, Text, Span, IconArrowLeft, IconSpan, ListGenres, ItemGenres} from "./MovieCard.styled";
 
@@ -37,4 +39,21 @@ export const MovieCard = ({ movie }) => {
       </ContainerWrraper>
     </main>
   );
+};
+
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    release_date: PropTypes.string,
+    vote_average: PropTypes.number,
+    poster_path: PropTypes.string,
+    overview: PropTypes.string,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      }),
+    ),
+  }),
 };

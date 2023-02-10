@@ -1,8 +1,12 @@
-import { toast } from 'react-toastify';
+import { ThreeCircles } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'Api';
+import { Wrraper, Container, List, Title, Text } from './Cast.styled';
+import { Profile } from 'components/Profile/Profile';
+
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -14,18 +18,15 @@ export const Cast = () => {
   useEffect(() => {
     async function fetchMoviesCreditsEffect() {
       try {
-        const cast  = await fetchMovieCredits(id);
-        // const castData = await cast.map(
-        //   ({ name, profile_path, character }) => ({
-        //     name,
-        //     profile_path,
-        //     character,
-        //   })
-        // );
-        setCast(cast);
-        console.log(cast);
+        const castData  = await fetchMovieCredits(id);
+
+        if(castData.cast.length > 0) {
+          setCast(castData.cast);
+          console.log(castData.cast);
+        }
+
       } catch (error) {
-        setError(toast.error('Something went wrong:('));
+        setError('Something went wrong:(');
       } finally {
         setIsLoading(false);
       }
@@ -35,23 +36,44 @@ export const Cast = () => {
   }, [id]);
 
   return (
-    <div>
-      <div>
-        <ul>
+    <Wrraper>
+      {isLoading && (
+      <ThreeCircles
+      height="100"
+      width="100"
+      color="rgb(255, 69, 0)"
+      wrapperStyle={{ display: 'flex', justifyContent:  'center' }}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="three-circles-rotating"
+      outerCircleColor=""
+      innerCircleColor=""
+      middleCircleColor=""
+      />
+    )}
+      <Container>
+        <List>
           {cast.map(({ name, profile_path, character }) => (
             <li key={name}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-                alt={name}
-                width={300}
-              />
-              <h2>{name}</h2>
-              <p>{character}</p>
+              <Profile profile_path={profile_path} name={name} character={character} />
+              <Title>{name}</Title>
+              <Text>{character}</Text>
             </li>
           ))}
-        </ul>
-        {error && <h2>{error}</h2>}
-      </div>
-    </div>
+        </List>
+        {error && <h2>We don't have any reviews for this movie</h2>}
+      </Container>
+    </Wrraper>
   );
+};
+
+
+Cast.propTypes = {
+  cast: PropTypes.arrayOf(
+      PropTypes.shape({
+          character: PropTypes.string.isRequired,
+          profile_path: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+      })
+  )
 };

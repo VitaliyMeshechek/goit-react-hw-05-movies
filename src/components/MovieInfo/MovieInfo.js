@@ -1,4 +1,5 @@
-// import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+
 import { Img, Wrraper, Container, Title, Paragraph } from "./MovieInfo.styled";
 
 export const MovieInfo = ({ movie }) => {
@@ -8,10 +9,6 @@ export const MovieInfo = ({ movie }) => {
     poster_path,
   } = movie;
 
-
-  //   const getPosterUrl = (posterPath) => {
-  //   return `https://image.tmdb.org/t/p/w500${posterPath}`
-  // };
   const posterUrl = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
   return (
@@ -26,4 +23,11 @@ export const MovieInfo = ({ movie }) => {
          <Paragraph>{Math.round(vote_average * 10)}%</Paragraph>
     </Wrraper>
   );
+};
+
+
+MovieInfo.propTypes = {
+  title: PropTypes.string.isRequired,
+  poster_path: PropTypes.string,
+  vote_average: PropTypes.number,
 };

@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { ThreeCircles } from 'react-loader-spinner';
 
 import { useState, useEffect } from 'react';
 import { fetchMoviesTrending } from "Api";
@@ -25,7 +25,7 @@ export const Home = () => {
             // console.log('Home', data.results);
 
         } catch (error) {
-          setError(toast.error('Something went wrong:('));
+          setError('Something went wrong:(');
         } finally {
           setIsLoading(false);
         }
@@ -35,6 +35,20 @@ export const Home = () => {
 
   return (
     <main>
+    {isLoading && (
+      <ThreeCircles
+      height="100"
+      width="100"
+      color="rgb(255, 69, 0)"
+      wrapperStyle={{ display: 'flex', justifyContent:  'center' }}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="three-circles-rotating"
+      outerCircleColor=""
+      innerCircleColor=""
+      middleCircleColor=""
+      />
+    )}
       <Title>Trending Today</Title>
           <List>
           {movies.map((item) => (
@@ -45,6 +59,7 @@ export const Home = () => {
           </Link>
       ))}
     </List>
+    {error && <h2>{error}</h2>}
     </main>
   );
 };

@@ -1,8 +1,10 @@
- import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+import { useState, useEffect } from 'react';
 import { fetchMoviesDetails } from "Api";
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
-import { List, Item, Img, Paragraph, Title} from './MoviesList.styled';
+import { List, Item } from './MoviesList.styled';
 
 
 export const MoviesList = ({movies}) => {
@@ -51,3 +53,8 @@ export const MoviesList = ({movies}) => {
       </>
   );
 }
+
+
+MoviesList.propType = {
+  onSubmit: PropTypes.func.isRequired,
+};

@@ -24,6 +24,7 @@ font-weight: 700;
 color: rgb(0, 0, 0);
 font-size: 34px;
 line-height: 1.18;
+transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
 &:hover {
 color: rgb(255, 69, 0);
 }`;
@@ -34,6 +35,7 @@ color: rgb(255, 69, 0);
   color: rgb(0, 0, 0);
   font-size: 22px;
   line-height: 1.18;
+  transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
   color: rgb(255, 69, 0);
 }`;
@@ -44,6 +46,7 @@ export const Paragraph = styled.p`
   color: rgb(0, 0, 0);
   font-size: 18px;
   line-height: 1.14;
+  transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
   color: rgb(255, 69, 0);
 }
@@ -69,6 +72,7 @@ export const Span = styled.span`
 
 export const IconArrowLeft = styled(FaArrowCircleLeft)
 `margin-right: 8px;
+transition: fill 500ms cubic-bezier(0.4, 0, 0.2, 1);
 &:hover,
  focus {
   fill: rgb(255, 69, 0);
@@ -82,6 +86,7 @@ margin-bottom: 10px;
 font-weight: 500;
 font-size: 18px;
 line-height: 1.14;
+transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
 &:hover,
  focus {
   color: rgb(255, 69, 0);

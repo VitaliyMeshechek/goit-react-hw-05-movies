@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify';
-import { useState } from "react";
+import PropTypes from 'prop-types';
+
 import { Container, Form, Button, Input, SearchIcon } from "./SearchMovie.styled";
 
 
@@ -29,4 +29,9 @@ export const SearchMovie = ({ onSubmit }) => {
   </Form>
   </Container>
    )
+};
+
+
+SearchMovie.propType = {
+  onSubmit: PropTypes.func.isRequired,
 };

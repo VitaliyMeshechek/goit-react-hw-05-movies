@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { ThreeCircles } from 'react-loader-spinner';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -48,6 +49,20 @@ export const Movies = () => {
 
   return (
     <main>
+    {isLoading && (
+      <ThreeCircles
+      height="100"
+      width="100"
+      color="rgb(255, 69, 0)"
+      wrapperStyle={{ display: 'flex', justifyContent:  'center' }}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="three-circles-rotating"
+      outerCircleColor=""
+      innerCircleColor=""
+      middleCircleColor=""
+      />
+    )}
     {!isLoading && <SearchMovie onSubmit={onSearchParams} />}
       {!isLoading && query !== null && <MoviesList movies={movies} />}
       {error && <h2>{error}</h2>}

@@ -1,8 +1,10 @@
-import { toast } from 'react-toastify';
+import { ThreeCircles } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'Api';
+import { List, Title, Text, Item } from './Reviews.styled';
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState([])
@@ -14,18 +16,12 @@ export const Reviews = () => {
   useEffect(() => {
     async function fetchMovieReviewsEffect() {
       try {
-        const review  = await fetchMovieReviews(id);
-        // const castData = await cast.map(
-        //   ({ name, profile_path, character }) => ({
-        //     name,
-        //     profile_path,
-        //     character,
-        //   })
-        // );
-        setReviews(review);
-        console.log(review);
+        const reviewData  = await fetchMovieReviews(id);
+
+        setReviews(reviewData.results);
+        console.log(reviewData.results);
       } catch (error) {
-        setError(toast.error('Something went wrong:('));
+        setError('Something went wrong:(');
       } finally {
         setIsLoading(false);
       }
@@ -36,20 +32,44 @@ export const Reviews = () => {
 
   return (
     <div>
+      {isLoading && (
+      <ThreeCircles
+      height="100"
+      width="100"
+      color="rgb(255, 69, 0)"
+      wrapperStyle={{ display: 'flex', justifyContent:  'center' }}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="three-circles-rotating"
+      outerCircleColor=""
+      innerCircleColor=""
+      middleCircleColor=""
+      />
+    )}
       <div>
-        {reviews.length > 0 ? (
-          <ul>
+        {reviews && (
+          <List>
             {reviews.map(({ author, content, id }) => (
-              <li key={id}>
-                <h2>{author}</h2>
-                <p>{content}</p>
-              </li>
+              <Item key={id}>
+                <Title>{author}</Title>
+                <Text>{content}</Text>
+              </Item>
             ))}
-          </ul>
-        ) : (
-          <h2>We don't have any reviews for this movie</h2>
+          </List>
         )}
+        {(error && <h2>We don't have any reviews for this movie</h2>)}
       </div>
     </div>
   );
+};
+
+
+Reviews.propTypes = {
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        author: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+      })
+  )
 };
