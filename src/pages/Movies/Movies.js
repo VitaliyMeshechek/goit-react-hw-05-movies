@@ -1,4 +1,4 @@
-import toast, { Toaster } from 'react-hot-toast';
+// import {toast} from 'react-hot-toast';
 import { ThreeCircles } from 'react-loader-spinner';
 
 import { useState, useEffect } from 'react';
@@ -38,9 +38,9 @@ import SearchMovie from 'components/SearchMovie/SearchMovie';
 
  const onSearchParams = searchMovie => {
   setSearchParams(searchMovie !== '' ? { query: searchMovie } : {})
-  if (!searchMovie) {
-    const notify = () =>toast.info('Search results did not match any movies! Enter a different name.');
-   }
+  // if (!searchMovie) {
+  //   toast.info('Search results did not match any movies! Enter a different name.');
+  //  }
 };
 
   return (
@@ -61,7 +61,6 @@ import SearchMovie from 'components/SearchMovie/SearchMovie';
     )}
     {!isLoading && <SearchMovie onSubmit={onSearchParams} />}
       {!isLoading && query !== null && <MoviesList movies={movies} />}
-      <Toaster />
      </main>
   );
 };
