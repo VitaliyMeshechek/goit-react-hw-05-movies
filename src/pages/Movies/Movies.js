@@ -61,6 +61,7 @@ import SearchMovie from 'components/SearchMovie/SearchMovie';
     )}
     {!isLoading && <SearchMovie onSubmit={onSearchParams} />}
       {!isLoading && query !== null && <MoviesList movies={movies} />}
+      {error && <h2>{error}</h2>}
      </main>
   );
 };
