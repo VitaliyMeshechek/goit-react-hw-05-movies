@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 
-export const Profile = ({ profile_path, name }) => {
+  const Profile = ({ profile_path, name }) => {
   const profileUrl = `https://image.tmdb.org/t/p/w500/${profile_path}`;
 
   return (
@@ -16,9 +16,9 @@ export const Profile = ({ profile_path, name }) => {
   );
 };
 
+export default Profile;
 
 Profile.propTypes = {
-  photo: PropTypes.string,
+  profile_path: PropTypes.string,
   name: PropTypes.string.isRequired,
-  character: PropTypes.string.isRequired,
 };

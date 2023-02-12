@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'Api';
 import { Wrraper, Container, List, Title, Text } from './Cast.styled';
-import { Profile } from 'components/Profile/Profile';
+import Profile from 'components/Profile/Profile';
 
 
-export const Cast = () => {
+  const Cast = () => {
   const [cast, setCast] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,12 +18,17 @@ export const Cast = () => {
   useEffect(() => {
     async function fetchMoviesCreditsEffect() {
       try {
-        const castData  = await fetchMovieCredits(id);
+        const data  = await fetchMovieCredits(id);
 
-        if(castData.cast.length > 0) {
-          setCast(castData.cast);
-          console.log(castData.cast);
-        }
+        let newObjectCast = [];
+        const results = data.cast;
+        const filterName = results.map(result => result.name);
+        const actorsName = Array.from(new Set(filterName));
+        actorsName.forEach(name => {
+        newObjectCast.push(results.find(result => result.name === name))
+        })
+
+        setCast(newObjectCast);
 
       } catch (error) {
         setError('Something went wrong:(');
@@ -53,9 +58,9 @@ export const Cast = () => {
     )}
       <Container>
         <List>
-          {cast.map(({ name, profile_path, character }) => (
-            <li key={name}>
-              <Profile profile_path={profile_path} name={name} character={character} />
+          {cast.map(({ id, name, profile_path, character }) => (
+            <li key={id}>
+              <Profile profile_path={profile_path} name={name} />
               <Title>{name}</Title>
               <Text>{character}</Text>
             </li>
@@ -67,13 +72,15 @@ export const Cast = () => {
   );
 };
 
+export default Cast;
 
 Cast.propTypes = {
   cast: PropTypes.arrayOf(
       PropTypes.shape({
+          id: PropTypes.number.isRequired,
           character: PropTypes.string.isRequired,
           profile_path: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
+          name: PropTypes.string,
       })
   )
 };

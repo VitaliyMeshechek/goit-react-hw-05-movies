@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'Api';
 import { List, Title, Text, Item } from './Reviews.styled';
 
-export const Reviews = () => {
+  const Reviews = () => {
   const [reviews, setReviews] = useState([])
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +19,7 @@ export const Reviews = () => {
         const reviewData  = await fetchMovieReviews(id);
 
         setReviews(reviewData.results);
-        console.log(reviewData.results);
+
       } catch (error) {
         setError('Something went wrong:(');
       } finally {
@@ -63,6 +63,7 @@ export const Reviews = () => {
   );
 };
 
+export default Reviews;
 
 Reviews.propTypes = {
   reviews: PropTypes.arrayOf(

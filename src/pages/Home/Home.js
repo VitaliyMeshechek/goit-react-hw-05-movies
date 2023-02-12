@@ -1,20 +1,16 @@
 import { ThreeCircles } from 'react-loader-spinner';
+// import PropTypes from 'prop-types';
 
 import { useState, useEffect } from 'react';
 import { fetchMoviesTrending } from "Api";
-import { Link, useLocation } from 'react-router-dom';
-import { Title, List, Item } from './Home.styled';
-import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import { Title } from './Home.styled';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 
-
-
-export const Home = () => {
+  const Home = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const location = useLocation();
 
   useEffect(() => {
     async function fetchMoviesEffect() {
@@ -50,22 +46,13 @@ export const Home = () => {
       />
     )}
       <Title>Trending Today</Title>
-          <List>
-          {movies.map((item) => (
-          <Link key={item.id} to={`/movies/${item.id}`} state={{ from: location }}>
-            <Item >
-              <MovieInfo movie={item}/>
-            </Item>
-          </Link>
-      ))}
-    </List>
+      {movies && <MoviesList movies={movies}/>}
     {error && <h2>{error}</h2>}
     </main>
   );
 };
 
-
-
+export default Home;
 
 
 

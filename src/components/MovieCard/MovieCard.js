@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, useLocation } from "react-router-dom";
 import { ContainerWrraper, Img, TitleMain, Title, Paragraph, Text, Span, IconArrowLeft, IconSpan, ListGenres, ItemGenres} from "./MovieCard.styled";
 
-export const MovieCard = ({ movie }) => {
+  const MovieCard = ({ movie }) => {
   const { title, genres, release_date, overview, vote_average, poster_path } = movie;
 
   const vote = Math.round(vote_average * 10);
@@ -41,6 +41,7 @@ export const MovieCard = ({ movie }) => {
   );
 };
 
+export default MovieCard;
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({

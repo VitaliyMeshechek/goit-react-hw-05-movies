@@ -1,17 +1,23 @@
 import PropTypes from 'prop-types';
+// import { toast } from 'react-hot-toast';
 
 import { Container, Form, Button, Input, SearchIcon } from "./SearchMovie.styled";
 
 
-export const SearchMovie = ({ onSubmit }) => {
+  const SearchMovie = ({ onSubmit }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
     const { value } = event.target.name;
     onSubmit(value);
-  };
 
-  // const resetForm = () => setSearchMovie('');
+    // if (!value.trim()) {
+    //   toast.info('Please write your request', {
+    //     autoClose: 2000,
+    //   });
+    //   return;
+    // }
+  };
 
   return (
     <Container>
@@ -31,6 +37,7 @@ export const SearchMovie = ({ onSubmit }) => {
    )
 };
 
+export default SearchMovie;
 
 SearchMovie.propType = {
   onSubmit: PropTypes.func.isRequired,

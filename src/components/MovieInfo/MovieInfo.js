@@ -1,13 +1,9 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { Img, Wrraper, Container, Title, Paragraph } from "./MovieInfo.styled";
 
-export const MovieInfo = ({ movie }) => {
-  const {
-    title,
-    vote_average,
-    poster_path,
-  } = movie;
+ const MovieInfo = ({ title, vote_average, poster_path }) => {
+
 
   const posterUrl = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
@@ -25,9 +21,10 @@ export const MovieInfo = ({ movie }) => {
   );
 };
 
+export default MovieInfo;
 
-MovieInfo.propTypes = {
-  title: PropTypes.string.isRequired,
-  poster_path: PropTypes.string,
-  vote_average: PropTypes.number,
-};
+// MovieInfo.propTypes = {
+//   title: PropTypes.string,
+//   poster_path: PropTypes.string,
+//   vote_average: PropTypes.number,
+// };

@@ -1,60 +1,42 @@
-import PropTypes from 'prop-types';
-
-import { useState, useEffect } from 'react';
-import { fetchMoviesDetails } from "Api";
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+// import PropTypes from 'prop-types';
+import { Link, useLocation } from 'react-router-dom';
+import MovieInfo from 'components/MovieInfo/MovieInfo';
 import { List, Item } from './MoviesList.styled';
 
 
-export const MoviesList = ({movies}) => {
-
-  const [detailsMovies, setdetailsMovies] = useState(null);
-  const [error, setError] = useState(null);
+  const MoviesList = ({movies}) => {
 
   const location = useLocation();
-
-  const {id} = useParams();
-
-  useEffect(() => {
-   async function fetchMoovMoviesEffect() {
-
-      try {
-        const data = await fetchMoviesDetails(id);
-        if(data.results.length > 0) {
-          setdetailsMovies(data.results);
-          console.log('MovieDetails', data.results);
-        }
-        } catch (error) {
-          setError('Something went wrong:(');
-        } finally {
-        }
-     }
-     fetchMoovMoviesEffect();
-    }, [id])
 
 
   return (
     <>
-    {detailsMovies === null && (
       <List>
-      {movies.map(({movie}) => (
-        <Item key={movie.id}>
-          <Link to={`/movies/${movie.id}`} state={ {from: location } }>
+      {movies.map(({id, title, vote_average, poster_path}) => (
+        <Item key={id}>
+          <Link to={`/movies/${id}`} state={ {from: location } }>
             <MovieInfo
-             movie={movie}
+             title={title}
+             vote_average={vote_average}
+             poster_path={poster_path}
             />
-            {movie.title}
           </Link>
         </Item>
           ))}
       </List>
-      )}
       </>
   );
 }
 
+export default MoviesList;
 
-MoviesList.propType = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// MoviesList.propTypes = {
+//   movies: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       vote_average: PropTypes.number.isRequired,
+//       title: PropTypes.string,
+//       poster_path: PropTypes.string,
+//     })
+//   ).isRequired,
+// };

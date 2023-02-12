@@ -1,13 +1,13 @@
 import { ThreeCircles } from 'react-loader-spinner';
 
 import { useParams } from 'react-router-dom';
-import { MovieCard } from 'components/MovieCard/MovieCard';
-import { useState, useEffect } from 'react';
 import { fetchMoviesDetails } from 'Api';
+import { useState, useEffect } from 'react';
+import MovieCard from 'components/MovieCard/MovieCard';
 import AdditionalInformation from 'components/AdditionalInformation/AdditionalInformation';
 
 
-export const MovieDetails = () => {
+  const MovieDetails = () => {
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,3 +54,6 @@ export const MovieDetails = () => {
     </>
   )
 };
+
+
+export default MovieDetails;
