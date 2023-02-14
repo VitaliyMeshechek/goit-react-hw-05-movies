@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // import { toast } from 'react-hot-toast';
 
-import { Container, Form, Button, Input, SearchIcon } from "./SearchMovie.styled";
+import { Form, Button, Input, SearchIcon } from "./SearchMovie.styled";
 
 
   const SearchMovie = ({ onSubmit }) => {
@@ -20,7 +20,6 @@ import { Container, Form, Button, Input, SearchIcon } from "./SearchMovie.styled
   };
 
   return (
-    <Container>
   <Form onSubmit={handleSubmit}>
     <Button type="submit">
       <span><SearchIcon /></span>
@@ -33,7 +32,6 @@ import { Container, Form, Button, Input, SearchIcon } from "./SearchMovie.styled
       placeholder="Search images and photos"
     />
   </Form>
-  </Container>
    )
 };
 
